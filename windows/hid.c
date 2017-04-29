@@ -94,6 +94,7 @@ static HidD_GetPreparsedData_ HidD_GetPreparsedData;
 static HidD_FreePreparsedData_ HidD_FreePreparsedData;
 static HidP_GetCaps_ HidP_GetCaps;
 static HidD_SetNumInputBuffers_ HidD_SetNumInputBuffers;
+static HidD_SetOutputReport_ HidD_SetOutputReport;
 
 static CM_Locate_DevNodeW_ CM_Locate_DevNodeW = NULL;
 static CM_Get_Parent_ CM_Get_Parent = NULL;
@@ -147,6 +148,7 @@ static int lookup_functions()
 	RESOLVE(hid_lib_handle, HidD_FreePreparsedData);
 	RESOLVE(hid_lib_handle, HidP_GetCaps);
 	RESOLVE(hid_lib_handle, HidD_SetNumInputBuffers);
+	RESOLVE(hid_lib_handle, HidD_SetOutputReport);
 
 	RESOLVE(cfgmgr32_lib_handle, CM_Locate_DevNodeW);
 	RESOLVE(cfgmgr32_lib_handle, CM_Get_Parent);
@@ -1074,6 +1076,17 @@ end_of_function:
 	return function_result;
 }
 
+int HID_API_EXPORT HID_API_CALL hid_write_control(hid_device *dev, const unsigned char *data, size_t length)
+{
+	BOOL res = HidD_SetOutputReport(dev->device_handle, (PVOID)data, (ULONG)length);
+
+	if (!res) {
+		register_winapi_error(dev, L"SetOutputReport");
+		return -1;
+	}
+
+	return (int)length;
+}
 
 int HID_API_EXPORT HID_API_CALL hid_read_timeout(hid_device *dev, unsigned char *data, size_t length, int milliseconds)
 {
