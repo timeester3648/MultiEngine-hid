@@ -26,3 +26,11 @@ libtool
 
 # Qt Creator
 CMakeLists.txt.user
+
+# exclude project files
+**.sln
+**.vcxproj
+**.vcxproj.user
+**.vcxproj.filters
+
+VERSION
