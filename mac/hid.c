@@ -1102,12 +1102,6 @@ int HID_API_EXPORT hid_write_control(hid_device *dev, const unsigned char *data,
 	return hid_write(dev, data, length);
 }
 
-int HID_API_EXPORT hid_write_control(hid_device *dev, const unsigned char *data, size_t length)
-{
-	//RPCS3 TODO: Test if this needs to be changed for control on mac if we ever use it
-	return hid_write(dev, data, length);
-}
-
 int HID_API_EXPORT hid_write(hid_device *dev, const unsigned char *data, size_t length)
 {
 	return set_report(dev, kIOHIDReportTypeOutput, data, length);
@@ -1453,19 +1447,6 @@ HID_API_EXPORT const wchar_t * HID_API_CALL  hid_error(hid_device *dev)
 	if (last_global_error_str == NULL)
 		return L"Success";
 	return last_global_error_str;
-}
-
-int HID_API_EXPORT hid_init_sixaxis_usb(hid_device *dev)
-{
-	const char data[] = { 0x42, 0x0C, 0x00, 0x00 };
-	size_t length = sizeof(data);
-	const unsigned char report_id = 0xF4;
-
-	if (IOHIDDeviceSetReport(dev->device_handle, kIOHIDReportTypeFeature, report_id, data, length) == kIOReturnSuccess) {
-		return length;
-	}
-
-	return -1;
 }
 
 int HID_API_EXPORT hid_init_sixaxis_usb(hid_device *dev)
