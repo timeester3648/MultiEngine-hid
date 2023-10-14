@@ -21,4 +21,4 @@ project "hid"
 	}
 
  	filter "system:windows"
-		files { "./windows/*.c" }
+		files { "./windows/hid.c" }
