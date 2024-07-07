@@ -10,8 +10,8 @@ void main(MultiBuild::Workspace& workspace) {
 		"./"
 	});
 
-	project.include_directories("./hidapi");
-	project.excluded_files("./VERSION");
+	properties.include_directories("./hidapi");
+	properties.excluded_files("./VERSION");
 
 	{
 		MultiBuild::ScopedFilter _(workspace, "config.platform:Windows");
