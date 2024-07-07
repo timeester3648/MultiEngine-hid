@@ -2,9 +2,9 @@ void main(MultiBuild::Workspace& workspace) {
 	auto project = workspace.create_project(".");
 	auto properties = project.properties();
 
-	properties.name("hid");
+	project.name("hid");
 	properties.binary_object_kind(MultiBuild::BinaryObjectKind::eStaticLib);
-	properties.license("./LICENSE-bsd.txt");
+	project.license("./LICENSE-bsd.txt");
 	
 	project.add_required_project_include({
 		"./"
