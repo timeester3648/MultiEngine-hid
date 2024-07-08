@@ -7,7 +7,7 @@ void main(MultiBuild::Workspace& workspace) {
 	project.license("./LICENSE-bsd.txt");
 	
 	project.add_required_project_include({
-		"./"
+		"./hidapi"
 	});
 
 	properties.include_directories("./hidapi");
