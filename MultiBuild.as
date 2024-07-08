@@ -14,7 +14,7 @@ void main(MultiBuild::Workspace& workspace) {
 	properties.excluded_files("./VERSION");
 
 	{
-		MultiBuild::ScopedFilter _(workspace, "config.platform:Windows");
+		MultiBuild::ScopedFilter _(project, "config.platform:Windows");
 		properties.files("./windows/hid.c");
 	}
 }
